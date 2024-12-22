@@ -1,3 +1,5 @@
+FROM nginx:alpine
+
 WORKDIR /run
 
 ## copy files
