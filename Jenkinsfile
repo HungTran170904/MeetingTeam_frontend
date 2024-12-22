@@ -13,6 +13,7 @@ def dockerhubAccount = 'dockerhub'
 def githubAccount = 'github'
 
 def dockerfilePath = './'
+def nodeModulesPath = '/var/node_modules'
 def version = "v2.${BUILD_NUMBER}"
 
 pipeline{
@@ -31,8 +32,8 @@ pipeline{
                     stage('test stage'){
                               steps{
                                         container('nodejs'){
-                                                  sh 'echo $(ls .)'
-                                                  sh 'npm install'
+                                                  sh 'ls .'
+                                                  sh "npm install --prefix ${nodeModulesPath}"
                                                   sh 'npm test'
                                         }
                               }
