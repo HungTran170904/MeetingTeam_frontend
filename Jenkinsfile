@@ -31,6 +31,7 @@ pipeline{
                     stage('test stage'){
                               steps{
                                         container('nodejs'){
+                                                  sh 'echo $(ls .)'
                                                   sh 'npm install'
                                                   sh 'npm test'
                                         }
