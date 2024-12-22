@@ -29,11 +29,24 @@ pipeline{
           }
 
           stages{
+                    stage('install stage'){
+                              steps{
+                                        container('nodejs'){
+                                                   cache(caches: [
+                                                            arbitraryFileCache(
+                                                            path: "node_modules",
+                                                            includes: "**/*",
+                                                            cacheValidityDecidingFile: "package-lock.json"
+                                                            )
+                                                  ]) {
+                                                            sh "npm install"
+                                                  }
+                                        }
+                              }
+                    }
                     stage('test stage'){
                               steps{
                                         container('nodejs'){
-                                                  sh 'ls .'
-                                                  sh "npm install --prefix ${nodeModulesPath}"
                                                   sh 'npm test'
                                         }
                               }
