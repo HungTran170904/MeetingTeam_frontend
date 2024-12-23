@@ -55,12 +55,16 @@ pipeline{
                               steps{
                                         container('nodejs'){
                                                   sh 'npm run build'
+                                                  sh "echo '----build stage-----'"
+                                                  sh 'ls build'
                                         }
                               }
                     }
                     stage('build and push image'){
                               when{ branch 'main' }
                               steps{
+                                        sh "echo '----image stage-----'"
+                                        sh 'ls build'
                                         container('docker'){
                                                   script{
                                                             app = docker.build(DOCKER_IMAGE_NAME, dockerfilePath)
