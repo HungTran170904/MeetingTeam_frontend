@@ -19,7 +19,7 @@ def version = "v2.${BUILD_NUMBER}"
 pipeline{
           agent {
                     kubernetes {
-                              yaml readFile('jenkins-pod-template.yaml')
+                              inheritFrom 'nodejs-template'
                     }                 
           }
 
