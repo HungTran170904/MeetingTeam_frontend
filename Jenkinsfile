@@ -31,6 +31,7 @@ pipeline{
           stages{
                     stage('install stage'){
                               steps{
+                                        sh "ls ."
                                         container('nodejs'){
                                                    cache(caches: [
                                                             arbitraryFileCache(
@@ -98,11 +99,6 @@ pipeline{
                                                             """		
 				}				
                               }
-                    }
-          }
-          post{
-                    always{
-                              deleteDir()
                     }
           }
 }
