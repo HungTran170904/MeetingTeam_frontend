@@ -19,35 +19,7 @@ def version = "v2.${BUILD_NUMBER}"
 pipeline{
           agent {
                     kubernetes {
-                              yaml '''
-                              apiVersion: v1
-                              kind: Pod
-                              spec:
-                              containers:
-                              - name: nodejs
-                              image: 'node:18-alpine'
-                              command:
-                              - cat
-                              tty: true
-                              volumeMounts:
-                              - mountPath: /var/node_modules
-                                        name: node-modules
-                              - name: docker
-                              image: 'docker:latest'
-                              command:
-                              - cat
-                              tty: true
-                              volumeMounts:
-                              - mountPath: /var/run/docker.sock
-                                        name: docker-sock
-                              volumes:
-                              - name: node-modules
-                              hostPath:
-                              path: /var/node_modules
-                              - name: docker-sock
-                              hostPath:
-                              path: /var/run/docker.sock
-                              '''
+                              yaml readFile('jenkins-pod-template.yaml')
                     }                 
           }
 
