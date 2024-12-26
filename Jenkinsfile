@@ -19,7 +19,7 @@ def version = "v2.${BUILD_NUMBER}"
 pipeline{
           agent {
                     kubernetes {
-                              inheritFrom 'nodejs-template'
+                              inheritFrom 'nodejs'
                     }                 
           }
 
